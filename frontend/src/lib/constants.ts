@@ -11,84 +11,88 @@ export interface FieldSchema {
   tip: string;
 }
 
-/** 8 chỉ số y tế — đồng bộ với Pydantic backend & docx. */
-export const FIELDS: FieldSchema[] = [
+export const FIELDS = [
   {
     key: "Pregnancies",
     label: "Số lần mang thai",
-    unit: "",
+    unit: "lần",
     min: 0,
-    max: 20,
+    max: 17,
     step: 1,
     integer: true,
-    tip: "Số lần đã mang thai. Nam giới điền 0.",
+    tip: "Số lần mang thai thực tế (Tối đa 17 theo tập dữ liệu Pima)."
   },
   {
     key: "Glucose",
     label: "Glucose",
     unit: "mg/dL",
-    min: 1,
-    max: 300,
-    step: 0.1,
-    tip: "Nồng độ glucose huyết tương sau test dung nạp 2 giờ. Bình thường: 70–140 mg/dL.",
+    min: 44,
+    max: 200,
+    step: 1,
+    integer: true,
+    tip: "Nồng độ Glucose trong huyết tương sau 2 giờ trong xét nghiệm dung nạp glucose đường uống."
   },
   {
     key: "BloodPressure",
     label: "Huyết áp",
     unit: "mmHg",
-    min: 1,
-    max: 200,
-    step: 0.1,
-    tip: "Huyết áp tâm trương (số dưới khi đo huyết áp). Bình thường: 60–80 mmHg.",
+    min: 24,
+    max: 122,
+    step: 1,
+    integer: true,
+    tip: "Huyết áp tâm trương thực tế (Bình thường dao động từ 60–80 mmHg)."
   },
   {
     key: "SkinThickness",
     label: "Độ dày da",
     unit: "mm",
-    min: 0,
-    max: 100,
-    step: 0.1,
-    tip: "Độ dày nếp gấp da cơ tam đầu, đo bằng caliper. Thông thường 10–40 mm.",
+    min: 7,
+    max: 99,
+    step: 1,
+    integer: true,
+    tip: "Độ dày nếp gấp da cơ tam đầu dùng để ước tính lượng mỡ cơ thể."
   },
   {
     key: "Insulin",
     label: "Insulin",
     unit: "μU/mL",
-    min: 0,
-    max: 1000,
-    step: 0.1,
-    tip: "Nồng độ insulin huyết thanh sau 2 giờ. Bình thường: 16–166 μU/mL.",
+    min: 14,
+    max: 846,
+    step: 1,
+    integer: true,
+    tip: "Nồng độ định lượng Insulin huyết thanh sau 2 giờ."
   },
   {
     key: "BMI",
     label: "BMI",
     unit: "kg/m²",
-    min: 0.1,
-    max: 100,
+    min: 18.0,
+    max: 67.0,
     step: 0.1,
-    tip: "Chỉ số khối cơ thể = cân nặng (kg) / chiều cao² (m²). Bình thường: 18.5–24.9.",
+    integer: false,
+    tip: "Chỉ số khối cơ thể = Cân nặng (kg) / (Chiều cao x Chiều cao) (m)."
   },
   {
     key: "DiabetesPedigreeFunction",
-    label: "Diabetes Pedigree Function",
-    unit: "",
-    min: 0,
-    max: 3,
+    label: "Chỉ số di truyền tiểu đường",
+    unit: "DPF",
+    min: 0.08,
+    max: 2.42,
     step: 0.001,
-    tip: "Hệ số di truyền nguy cơ tiểu đường trong gia đình (0–3). Càng cao, nguy cơ di truyền càng lớn.",
+    integer: false,
+    tip: "Hệ số hàm lịch sử gia đình thể hiện mức độ di truyền bệnh tiểu đường."
   },
   {
     key: "Age",
     label: "Tuổi",
     unit: "năm",
     min: 21,
-    max: 120,
+    max: 81,
     step: 1,
     integer: true,
-    tip: "Tuổi hiện tại của người được khám.",
-  },
+    tip: "Tuổi của người thực hiện xét nghiệm (Tập dữ liệu giới hạn từ 21 tuổi trở lên)."
+  }
 ];
-
 export const SAMPLE_INPUT: DiabetesInput = {
   Pregnancies: 2,
   Glucose: 138,
